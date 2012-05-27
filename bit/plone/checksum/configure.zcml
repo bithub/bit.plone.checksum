@@ -1,0 +1,28 @@
+<configure xmlns="http://namespaces.zope.org/zope"
+           xmlns:five="http://namespaces.zope.org/five"
+           xmlns:browser="http://namespaces.zope.org/browser"
+	   xmlns:cmf="http://namespaces.zope.org/cmf"	
+	   xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+	   xmlns:zcml="http://namespaces.zope.org/zcml"
+	   i18n_domain='bit.plone.checksum'
+	   >
+
+  <include package="bit.content.checksum" />  
+  <include package=".events" />  
+
+  <adapter factory='.indexers.getChecksum' name='checksum' />
+
+  <adapter
+      for="plone.app.blob.interfaces.IATBlob"
+      factory='.checksum_content.BlobChecksumContent'
+      />
+
+  <class class="plone.app.blob.content.ATBlob">
+    <implements
+	interface="bit.content.checksum.interfaces.IChecksummable"
+	/>
+  </class>
+
+  <include file="./profiles.zcml" />
+
+</configure>
