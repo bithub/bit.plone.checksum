@@ -20,15 +20,21 @@ class ChecksumCP(ControlPanel):
         catalog = getToolByName(self.context, 'portal_catalog')
         results = catalog(object_provides='bit.content.checksum.interfaces.IChecksummable')
         csums = {}
-        [csums.__setitem__(x.checksum, x)
-         for x in results
-         if x.checksum]
+        for res in results:
+            if not res.checksum:
+                continue
+            if not res.checksum in csums:
+                csums[res.checksum] = []
+            csums[res.checksum].append(res)
         content = {}
-        paths = [x.getPath() for x in results]
         for result in results:
             item = self.get_item(result)
             item['checksum'] = result.checksum or None
-            item['dupes'] = {}
+            item['dupes'] = []
+            if result.checksum and len(csums[result.checksum]) > 1:
+                for dupe in csums[result.checksum]:
+                    if not dupe == result:
+                        item['dupes'].append(dupe.getURL())                    
             content[result.getPath()] = item
         return content
 
@@ -46,6 +52,7 @@ class ChecksumCP(ControlPanel):
                     'sort': True,
                     'visible': True,
                     'title': 'Dupes',
+                    'type': 'list',
                     },
                 })
         fields['index'] += [
