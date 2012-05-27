@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<configure xmlns="http://namespaces.zope.org/zope"
+           xmlns:five="http://namespaces.zope.org/five"
+           xmlns:browser="http://namespaces.zope.org/browser"
+	   xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+	   i18n_domain="bit.plone.summary"
+	   >
+
+  <browser:page
+      for="*"
+      name="reindex_checksum"
+      class=".checksum.ReindexChecksumView"
+      attribute="reindex_checksum"
+      permission="cmf.ManagePortal"
+      />  
+
+  <browser:page
+      for="*"
+      name="reindex_checksum_confirm"
+      class=".checksum.ReindexChecksumView"
+      template="./reindex_checksum.pt"
+      permission="cmf.ManagePortal"
+      /> 
+
+</configure>

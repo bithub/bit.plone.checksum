@@ -25,4 +25,8 @@
 
   <include file="./profiles.zcml" />
 
+  <configure zcml:condition="installed bit.plone.cp">
+    <include package=".cp" />
+  </configure>
+
 </configure>
