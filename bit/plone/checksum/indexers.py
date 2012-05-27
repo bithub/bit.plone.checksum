@@ -6,7 +6,7 @@ from bit.content.checksum.interfaces import IChecksummable, IChecksum
 
 
 @indexer(I)
-def getChecksum(obj, evt):
+def getChecksum(obj):
     """Make sure we index icon relative to portal"""
     if IChecksummable.providedBy(obj):
         return IChecksum(obj).checksum
