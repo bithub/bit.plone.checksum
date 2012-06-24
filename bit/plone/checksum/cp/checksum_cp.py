@@ -1,5 +1,4 @@
 from zope.interface import implements
-from zope.annotation.interfaces import IAnnotations
 
 from Products.CMFCore.utils import getToolByName
 

@@ -1,8 +1,6 @@
 import os
 import logging
 
-from zope.annotation.interfaces import IAnnotations
-
 from Products.Five import BrowserView as FiveView
 
 log = logging.getLogger('bit.plone.graphic')
